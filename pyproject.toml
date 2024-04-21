@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "mtagger"
+version = "0.1.0"
+description = ""
+authors = ["Jose Berrio <aldarisbm@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+requests = "^2.31.0"
+llama-cpp-python = "^0.2.44"
+python-youtube = "^0.9.4"
+pydantic = "^2.7.0"
+pydantic-settings = "^2.2.1"
+spotipy = "^2.23.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
