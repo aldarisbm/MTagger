@@ -13,6 +13,7 @@ python-youtube = "^0.9.4"
 pydantic = "^2.7.0"
 pydantic-settings = "^2.2.1"
 spotipy = "^2.23.0"
+mutagen = "^1.47.0"
 
 
 [build-system]

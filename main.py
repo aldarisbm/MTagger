@@ -9,7 +9,7 @@ def main():
         client_secret=settings.spotipy_client_secret
     )
     spotify = spotipy.Spotify(client_credentials_manager=creds)
-    playlist_id = '74H5Eh6UiM63N7wgfFV6qh'
+    playlist_id = input("Enter playlist ID: ")
     playlist = spotify.playlist(playlist_id=playlist_id)
     tracks = playlist['tracks']['items']
     for track in tracks[:1]:
