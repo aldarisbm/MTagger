@@ -1,9 +1,9 @@
-from mutagen.mp4 import MP4
+import mutagen
 
 
 def main():
-    mut = MP4('./test_files/Carmín.m4a')
-    print(mut['©alb'])
+    mut = mutagen.File('./test_files/Carmín.m4a', easy=True)
+    print(mut.get('title'))
 
     # mut['Title']
     # print(mut.info.__dict__)
@@ -15,7 +15,6 @@ def main():
 # for i in mut.values():
 #     print(i)
 #     print('****************************')
-
 
 if __name__ == '__main__':
     main()
