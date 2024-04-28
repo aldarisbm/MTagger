@@ -1,11 +1,23 @@
+import pyyoutube
 from pyyoutube import Api
 
-from config import settings
 
-api = Api(api_key=settings.yt_api_key)
-ts = api.search(q="best steam deck accessory")
-for item in ts.items[:1]:
-    item_dict = item.to_dict_ignore_none()
-    print(item_dict)
-    snippet = item_dict.get("snippet")
-    print(snippet)
+# class YoutubeHit:
+
+
+class Youtube:
+    api_key = str
+    _youtube_client = pyyoutube.Api
+
+    def __init__(self, api_key):
+        self.api_key = api_key
+        self._youtube_client = Api(api_key=api_key)
+
+    def search(self, query: str):
+        ts = self._youtube_client.search(q=query, limit=10, return_json=True)
+        # print(ts)
+        for item in ts['items']:
+            print(item)
+        #     snippet = item_dict.get("snippet")
+        #     print(snippet)
+#

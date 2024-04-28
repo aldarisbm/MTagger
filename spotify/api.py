@@ -48,9 +48,9 @@ class Spotify:
 
         return all_tracks
 
-    def get_playlist(self, id: str) -> SpotifyPlaylist:
-        playlist = self._spotify_client.playlist(playlist_id=id)
-        playlist_tracks = self._get_all_tracks(playlist_id=id)
+    def get_playlist(self, playlist_id: str) -> SpotifyPlaylist:
+        playlist = self._spotify_client.playlist(playlist_id=playlist_id)
+        playlist_tracks = self._get_all_tracks(playlist_id=playlist_id)
 
         spotify_playlist = SpotifyPlaylist()
         spotify_playlist.name = playlist["name"]
