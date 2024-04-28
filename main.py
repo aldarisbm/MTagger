@@ -1,20 +1,17 @@
-import mutagen
+from spotify.api import Spotify
 
 
 def main():
-    mut = mutagen.File('./test_files/Carmín.m4a', easy=True)
-    print(mut.get('title'))
+    # playlist = sys.argv[1]
+    client = Spotify()
+    playlist_id = "63YBONu8oFaV0IzdJz3Xzn"
 
-    # mut['Title']
-    # print(mut.info.__dict__)
+    client.get_playlist(playlist_id)
 
+    # print(playlist)
+    # mut = mutagen.File('./test_files/Carmín.m4a', easy=True)
+    # print(mut.get('title'))
 
-# print(mut.keys())
-# print(mut.items())
-# print(mut.get('©nam'))
-# for i in mut.values():
-#     print(i)
-#     print('****************************')
 
 if __name__ == '__main__':
     main()
