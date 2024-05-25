@@ -3,6 +3,8 @@ from typing import List
 
 import spotipy
 
+from config import settings
+
 
 @dataclass(kw_only=True)
 class SpotifyTrack:
@@ -16,21 +18,17 @@ class SpotifyPlaylist:
     tracks: List[SpotifyTrack] = []
 
 
+@dataclass
 class Spotify:
     client_id: str
     client_secret: str
 
     _spotify_client: spotipy.Spotify
 
-    def __init__(self, client_id: str = None, client_secret: str = None):
-        if not client_id and not client_secret:
-            from config import settings
+    def __post_init__(self):
+        if self.client_secret is None and self.client_id is None:
             self.client_id = settings.spotipy_client_id
             self.client_secret = settings.spotipy_client_secret
-        else:
-            self.client_id = client_id
-            self.client_secret = client_secret
-
         creds = spotipy.SpotifyClientCredentials(client_id=self.client_id, client_secret=self.client_secret)
         self._spotify_client = spotipy.Spotify(client_credentials_manager=creds)
 
