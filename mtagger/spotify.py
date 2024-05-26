@@ -14,7 +14,10 @@ class SpotifyTrack:
 @dataclass
 class SpotifyPlaylist:
     name: str = field(init=True)
-    tracks: List[SpotifyTrack] = field(init=True)
+    tracks: List[SpotifyTrack] = field(init=False)
+
+    def __post_init__(self):
+        self.tracks = []
 
 
 @dataclass(kw_only=True)
@@ -22,7 +25,7 @@ class Spotify:
     client_id: str = field(init=True)
     client_secret: str = field(init=True)
 
-    __spotify_client: spotipy.Spotify = field(init=True)
+    __spotify_client: spotipy.Spotify = field(init=False)
 
     def __post_init__(self):
         creds = spotipy.SpotifyClientCredentials(client_id=self.client_id, client_secret=self.client_secret)
@@ -46,16 +49,17 @@ class Spotify:
         playlist = self.__spotify_client.playlist(playlist_id=playlist_id)
         playlist_tracks = self._get_all_tracks(playlist_id=playlist_id)
 
-        spotify_playlist = SpotifyPlaylist()
-        spotify_playlist.name = playlist["name"]
+        playlist_name = playlist.get('name')
+        spotify_playlist = SpotifyPlaylist(name=playlist_name)
 
         for track in playlist_tracks:
-            artists = track['track']['artists']
+            t = track.get('track')
+            artists = t.get('artists')
             spotify_playlist.tracks.append(
                 SpotifyTrack(
-                    name=track['track']['name'],
-                    album=track['track']['album']['name'] if track['track']['album'] else None,
-                    artists=[artist['name'] for artist in artists],
+                    name=t.get('name'),
+                    album=t.get('album').get('name'),
+                    artists=[artist.get('name') for artist in artists],
                 )
             )
 

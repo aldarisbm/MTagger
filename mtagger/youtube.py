@@ -9,7 +9,7 @@ from config import settings
 @dataclass
 class Youtube:
     api_key: str = field(init=True)
-    __youtube_client: pyyoutube.Api = field(init=True)
+    __youtube_client: pyyoutube.Api = field(init=False)
 
     def __post_init__(self):
         self.api_key = self.api_key or settings.yt_api_key
