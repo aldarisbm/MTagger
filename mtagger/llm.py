@@ -1,13 +1,13 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 from llama_cpp import Llama
 
-from metadata.main import SeratoMetadata
+from mtagger.metadata.main import SeratoMetadata
 
 
 @dataclass
 class MetadataProducerLlm:
-    model_path: str
+    model_path: str = field(init=True)
 
     def __post_init__(self):
         llm = Llama(

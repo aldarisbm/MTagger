@@ -1,36 +1,32 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import List
 
 import spotipy
 
-from config import settings
 
-
-@dataclass(kw_only=True)
+@dataclass
 class SpotifyTrack:
-    artists: List[str]
-    album: str
-    name: str
-
-
-class SpotifyPlaylist:
-    name: str
-    tracks: List[SpotifyTrack] = []
+    artists: List[str] = field(init=True)
+    album: str = field(init=True)
+    name: str = field(init=True)
 
 
 @dataclass
-class Spotify:
-    client_id: str
-    client_secret: str
+class SpotifyPlaylist:
+    name: str = field(init=True)
+    tracks: List[SpotifyTrack] = field(init=True)
 
-    _spotify_client: spotipy.Spotify
+
+@dataclass(kw_only=True)
+class Spotify:
+    client_id: str = field(init=True)
+    client_secret: str = field(init=True)
+
+    __spotify_client: spotipy.Spotify = field(init=True)
 
     def __post_init__(self):
-        if self.client_secret is None and self.client_id is None:
-            self.client_id = settings.spotipy_client_id
-            self.client_secret = settings.spotipy_client_secret
         creds = spotipy.SpotifyClientCredentials(client_id=self.client_id, client_secret=self.client_secret)
-        self._spotify_client = spotipy.Spotify(client_credentials_manager=creds)
+        self.__spotify_client = spotipy.Spotify(client_credentials_manager=creds)
 
     def _get_all_tracks(self, playlist_id: str) -> []:
         all_tracks = []
@@ -38,7 +34,7 @@ class Spotify:
         offset = 0
         limit = 100
         while True:
-            items = self._spotify_client.playlist_items(playlist_id=playlist_id, limit=limit, offset=offset)['items']
+            items = self.__spotify_client.playlist_items(playlist_id=playlist_id, limit=limit, offset=offset)['items']
             if len(items) == 0:
                 break
             offset += limit
@@ -47,7 +43,7 @@ class Spotify:
         return all_tracks
 
     def get_playlist(self, playlist_id: str) -> SpotifyPlaylist:
-        playlist = self._spotify_client.playlist(playlist_id=playlist_id)
+        playlist = self.__spotify_client.playlist(playlist_id=playlist_id)
         playlist_tracks = self._get_all_tracks(playlist_id=playlist_id)
 
         spotify_playlist = SpotifyPlaylist()

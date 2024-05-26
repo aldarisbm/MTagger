@@ -1,4 +1,5 @@
-from dataclasses import dataclass
+import logging
+from dataclasses import dataclass, field
 
 import mutagen
 
@@ -7,15 +8,16 @@ from config import logger
 
 @dataclass
 class SeratoMetadata:
-    title: str
-    album: str
-    artist: str
-    genre: str
+    title: str = field(init=True)
+    album: str = field(init=True)
+    artist: str = field(init=True)
+    genre: str = field(init=True)
 
 
 @dataclass
 class Metadata:
     filename: str
+    logger: logging.Logger = field(init=False)
 
     def set_metadata(self, metadata: SeratoMetadata):
         try:
