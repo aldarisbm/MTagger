@@ -29,7 +29,11 @@ TODO
 from mtagger import MetadataExtractor
 
 # Initialize the metadata extractor
-extractor = MetadataExtractor(api_key='YOUR_YOUTUBE_API_KEY')
+extractor = MetadataExtractor(
+    yt_api_key='YOUR_YOUTUBE_API_KEY',
+    spotify_client_id='YOUR_SPOTIFY_CLIENT_ID',
+    spotify_client_secret='YOUR_SPOTIFY_CLIENT_SECRET'
+)
 
 # Load an MP3 file
 mp3_file = 'path/to/your/downloaded/mp3file.mp3'
@@ -51,7 +55,11 @@ print("Genre:", metadata.genre)
 from mtagger import MetadataExtractor
 
 # Initialize the metadata extractor
-extractor = MetadataExtractor(api_key='YOUR_YOUTUBE_API_KEY')
+extractor = MetadataExtractor(
+    yt_api_key='YOUR_YOUTUBE_API_KEY',
+    spotify_client_id='YOUR_SPOTIFY_CLIENT_ID',
+    spotify_client_secret='YOUR_SPOTIFY_CLIENT_SECRET'
+)
 
 # Load a folder containing MP3 files
 folder_path = 'path/to/your/downloaded/mp3files/'

@@ -2,24 +2,19 @@ from dataclasses import dataclass, field
 
 from llama_cpp import Llama
 
-from mtagger.metadata.main import SeratoMetadata
-
 
 @dataclass
 class MetadataProducerLlm:
     model_path: str = field(init=True)
+    __llm: Llama = field(init=False)
 
     def __post_init__(self):
         llm = Llama(
-            model_path=self.model_path
+            model_path=self.model_path,
+            n_gpu_layers=-1,
+            use_mlock=True,
+            n_ctx=128,
         )
 
-    def __get_current_metadata(self, file_path) -> str:
-        pass
-
-    def __get_serato_metadata(self, current_metadata: str) -> SeratoMetadata:
-        pass
-
-    def get_metadata_from_file(self, file_path: str) -> SeratoMetadata:
-        current_metadata = self.__get_current_metadata(file_path)
-        return self.__get_serato_metadata(current_metadata)
+    def inference(self, current_metadata: str) -> str:
+        self.__llm(current_metadata)

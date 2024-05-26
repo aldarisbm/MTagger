@@ -18,7 +18,6 @@ def main():
     yt_client = Youtube(
         api_key=settings.yt_api_key
     )
-
     yt_client.search(f"{first_track.name} {first_track.album} {first_track.artists}")
     # for root, dirs, files in os.walk(f"{os.getcwd()}/test_files"):
     #     for file in files[:1]:
