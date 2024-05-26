@@ -22,6 +22,7 @@ def main():
             print(mut.setdefault('title', 'the title'))
             print(mut.setdefault('album', 'the album'))
             print(mut.setdefault('artist', 'the artist'))
+            mut.tags['album'] = 'test'
             print("tags", mut.tags)
             print(mut.get('title'))
             print(mut.get('artist'))

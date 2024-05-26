@@ -1,3 +1,5 @@
+import logging
+
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -11,3 +13,6 @@ class Settings(BaseSettings):
 
 
 settings = Settings()
+
+logger = logging.getLogger(name='logger-metadata')
+logger.setLevel('INFO')
