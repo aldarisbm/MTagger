@@ -39,8 +39,8 @@ extractor = MetadataExtractor(
 mp3_file = 'path/to/your/downloaded/mp3file.mp3'
 
 # Retrieve and update metadata
-metadata = extractor.get_metadata(mp3_file)
-extractor.update_metadata(mp3_file, metadata)
+metadata = extractor.get_metadata(str)
+extractor.update_metadata(metadata)
 
 # Print the updated metadata
 print("Title:", metadata.title)

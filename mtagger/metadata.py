@@ -1,5 +1,6 @@
 import logging
 from dataclasses import dataclass, field
+from typing import Dict
 
 import mutagen
 
@@ -8,6 +9,7 @@ from config import logger
 
 @dataclass
 class SeratoMetadata:
+    filename: str = field(init=True)
     title: str = field(init=True)
     album: str = field(init=True)
     artist: str = field(init=True)
@@ -19,7 +21,7 @@ class Metadata:
     filename: str
     logger: logging.Logger = field(init=False)
 
-    def set_metadata(self, metadata: SeratoMetadata):
+    def set_metadata(self, metadata: SeratoMetadata) -> Dict:
         try:
             f = mutagen.File(self.filename)
         except mutagen.MutagenError:
