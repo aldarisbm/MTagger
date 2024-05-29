@@ -9,7 +9,6 @@ def main():
         client_id=settings.spotipy_client_id,
         client_secret=settings.spotipy_client_secret
     )
-
     playlist_id = "74H5Eh6UiM63N7wgfFV6qh"
 
     playlist = client.get_playlist(playlist_id)
@@ -18,7 +17,8 @@ def main():
     yt_client = Youtube(
         api_key=settings.yt_api_key
     )
-    yt_client.search(f"{first_track.name} {first_track.album} {first_track.artists}")
+    # yt_client.search(f"{first_track.name} {first_track.album} {first_track.artists}")
+    yt_client.search('Vai Novinha Ah Ah Ah - DJ DYAMANTE e Dj Rafael felix - Dj Zen Eyer Remix (Zouk Music)')
     # for root, dirs, files in os.walk(f"{os.getcwd()}/test_files"):
     #     for file in files[:1]:
     #         file_name = f'{root}/{file}'
@@ -36,5 +36,4 @@ def main():
     #         mut.save()
 
 
-if __name__ == '__main__':
-    main()
+main()
